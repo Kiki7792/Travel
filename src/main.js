@@ -4,6 +4,8 @@ import App from './App.vue'
 import './assets/styles/reset.css'
 //解决1px边框的css文件
 import './assets/styles/border.css'
+//引入iconfont的css样式
+import './assets/styles/iconfont.css'
 //引入fastclick库, 解决click有300ms延时的问题  -- cnpm install fastclick --save 
 import fastclick from 'fastclick'
 fastclick.attach(document.body)
