@@ -8,10 +8,14 @@ import './assets/styles/border.css'
 import './assets/styles/iconfont.css'
 //引入fastclick库, 解决click有300ms延时的问题  -- cnpm install fastclick --save 
 import fastclick from 'fastclick'
-fastclick.attach(document.body)
-
+//引入vue-awesome-swiper
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+// require styles
+import 'swiper/dist/css/swiper.css'
 
 Vue.config.productionTip = false
+fastclick.attach(document.body)
+Vue.use(VueAwesomeSwiper)
 
 //导入抽取的路由
 import router from "./router/index.js"
