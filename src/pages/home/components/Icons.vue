@@ -9,6 +9,7 @@
           <p class="icon-desc">{{item.desc}}</p>
         </div>
       </swiper-slide>
+      <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
   </div>
 </template>
@@ -20,6 +21,7 @@ export default {
     return {
       swiperOption: {
         // 去除了swiper的自动轮播
+        pagination: ".swiper-pagination", //图片上的小圆点
       },
       iconList: [
         {
@@ -110,6 +112,9 @@ export default {
 .icons >>> .swiper-container {
   height: 0;
   padding-bottom: 50%;
+}
+.icons >>> .swiper-pagination-bullet-active {
+  background: $bgColor;
 }
 
 .icons {
