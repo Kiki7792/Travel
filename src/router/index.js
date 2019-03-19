@@ -5,6 +5,7 @@ Vue.use(VueRouter)
 
 //导入组件
 import Home from "../pages/home/Home.vue"
+import City from "../pages/city/City.vue"
 
 //路由规则
 let routes = [
@@ -12,6 +13,11 @@ let routes = [
         path: '/',
         name: 'Home',
         component: Home
+    },
+    {
+        path: '/city',
+        name: 'City',
+        component: City
     },
     
 ]
