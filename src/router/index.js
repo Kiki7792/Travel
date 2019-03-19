@@ -18,6 +18,8 @@ let routes = [
 
 //实例化路由
 const router = new VueRouter({
+    //更改路由的默认hash为history
+    // mode: 'history',
     routes
 })
 

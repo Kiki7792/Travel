@@ -3,7 +3,7 @@
     <div class="title">热销推荐</div>
     <ul>
       <!-- 因为main.js引入了1px的边框解决方案, 所以这次就直接在li中加类名 border-bottom -->
-      <li class="item border-bottom" v-for="item of recommendList" :key="item.id">
+      <li class="item border-bottom" v-for="item of list" :key="item.id">
         <img class="item-img" :src="item.imgUrl">
 
         <div class="item-info">
@@ -18,32 +18,8 @@
 <script>
 export default {
   name: "HomeRecommend",
-  data() {
-    return {
-      recommendList: [
-        {
-          id: "0001",
-          imgUrl:
-            "http://img1.qunarzz.com/sight/p0/1903/93/939f4ea1d9f2f58da3.water.jpg_200x200_f57fdf8f.jpg",
-          title: "深圳欢乐谷",
-          desc: "狂欢无罪，够胆你就来!"
-        },
-        {
-          id: "0002",
-          imgUrl:
-            "http://img1.qunarzz.com/sight/p0/1902/80/80d7d3ef350b7fffa3.water.jpg_200x200_01e78b60.jpg",
-          title: "东部华侨城茶溪谷",
-          desc: "茶、禅、花、竹，绿的世界，花的世界"
-        },
-        {
-          id: "0003",
-          imgUrl:
-            "http://img1.qunarzz.com/sight/p0/1508/2e/d9363ce50a88c8c5ff5a138c67687cd4.water.jpg_200x200_1c15c8f5.jpg",
-          title: "深圳野生动物园",
-          desc: "这里有优雅和呆萌并存的睫毛精"
-        }
-      ]
-    };
+  props: {
+    list: Array
   }
 };
 </script>
