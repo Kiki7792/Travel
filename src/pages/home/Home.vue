@@ -9,13 +9,13 @@
   </div>
 </template>
 <script>
-import HomeHeader from './components/Header'
-import HomeSwiper from './components/Swiper'
-import HomeIcons from './components/Icons'
-import HomeRecommend from './components/Recommend'
-import HomeWeekend from './components/Weekend'
+import HomeHeader from "./components/Header";
+import HomeSwiper from "./components/Swiper";
+import HomeIcons from "./components/Icons";
+import HomeRecommend from "./components/Recommend";
+import HomeWeekend from "./components/Weekend";
 //引入axios发送ajax请求
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "Home",
@@ -28,40 +28,39 @@ export default {
   },
   data() {
     return {
-      city: '',
+      city: "",
       swiperList: [],
       iconList: [],
       recommendList: [],
       weekendList: []
-    }
+    };
   },
   //函数就是方法, 一般定义在methods里面
   methods: {
     getHomeInfo() {
       // axios.get('/api/index.json').then(this.getHomeInfoSucc)
-      axios.get('http://localhost:8080/mock/index.json').then(this.getHomeInfoSucc)
+      axios
+        .get("http://localhost:8080/mock/index.json")
+        .then(this.getHomeInfoSucc);
     },
     getHomeInfoSucc(res) {
-       res = res.data
-      if(res.ret && res.data) {
-        const data = res.data
-        this.city = data.city
-        this.swiperList = data.swiperList
-        this.iconList = data.iconList
-        this.recommendList = data.recommendList
-        this.weekendList = data.weekendList
-
+      res = res.data;
+      if (res.ret && res.data) {
+        const data = res.data;
+        this.city = data.city;
+        this.swiperList = data.swiperList;
+        this.iconList = data.iconList;
+        this.recommendList = data.recommendList;
+        this.weekendList = data.weekendList;
       }
-     
     }
   },
   mounted() {
     //让页面挂载好之后去执行getHomeInfo()这个函数
-    this.getHomeInfo()
+    this.getHomeInfo();
   }
 };
 </script>
 
 <style>
-
 </style>
