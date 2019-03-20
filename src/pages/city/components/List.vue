@@ -17,7 +17,7 @@
           </div>
         </div>
       </div>
-      <div class="area" v-for="(item, key) of cities" :key="key">
+      <div class="area" v-for="(item, key) of cities" :key="key" :ref="key">
         <div class="title border-topbottom">{{key}}</div>
         <div class="item-list" v-for="innerItem of item" :key="innerItem.id">
           <div class="item border-bottom">{{innerItem.name}}</div>
@@ -32,11 +32,27 @@ export default {
   name: "CityList",
   props: {
     hot: Array,
-    cities: Object
+    cities: Object,
+    letter: String
   },
   //页面DOM元素挂载完之后, 执行mounted() {}
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper);
+  },
+  watch: {
+    //   监听letter的变化, 当letter变化时, 使cities 数组渲染 当前letter的区域
+    letter() {
+      //console.log(this.letter); //A B C D...
+      //借用BScroll的一个方法, 使得滚动区域自动滚到某个元素上
+      if (this.letter) {
+        //在citties遍历数组的地方 :ref="key", 获取当前滚动字母的元素
+        // const element = this.$refs[this.letter];
+        // console.log(element); //[div.area]
+        const element = this.$refs[this.letter][0];
+        // console.log(element); //DOM树
+        this.scroll.scrollToElement(element);
+      }
+    }
   }
 };
 </script>

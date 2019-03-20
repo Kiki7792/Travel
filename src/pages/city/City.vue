@@ -2,8 +2,9 @@
   <div>
     <city-header></city-header>
     <city-search></city-search>
-    <city-list :cities="cities" :hot="hotCities"></city-list>
-    <city-alphabet :cities="cities"></city-alphabet>
+    <city-list :cities="cities" :hot="hotCities" :letter="letter"></city-list>
+    <!-- 使用@change监听来自 子组件Alphabet.vue $emit传递过来的change事件 -->
+    <city-alphabet :cities="cities" @change="HandleLetterChange"></city-alphabet>
   </div>
 </template>
 <script>
@@ -27,7 +28,8 @@ export default {
   data() {
     return {
       cities: {},
-      hotCities: []
+      hotCities: [],
+      letter: ""
     };
   },
   methods: {
@@ -44,6 +46,11 @@ export default {
         this.cities = data.cities;
         this.hotCities = data.hotCities;
       }
+    },
+    HandleLetterChange(letter) {
+      // 再把letter 传递给子组件List
+      // console.log(letter);
+      this.letter = letter;
     }
   },
   mounted() {
