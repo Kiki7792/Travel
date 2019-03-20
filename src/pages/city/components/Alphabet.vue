@@ -1,6 +1,4 @@
 <template>
-  import { setTimeout } from 'timers';
-  import { clearTimeout } from 'timers';
   <ul class="list">
     <li
       class="item"
