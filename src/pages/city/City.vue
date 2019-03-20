@@ -1,7 +1,7 @@
 <template>
   <div>
     <city-header></city-header>
-    <city-search></city-search>
+    <city-search :cities="cities"></city-search>
     <city-list :cities="cities" :hot="hotCities" :letter="letter"></city-list>
     <!-- 使用@change监听来自 子组件Alphabet.vue $emit传递过来的change事件 -->
     <city-alphabet :cities="cities" @change="HandleLetterChange"></city-alphabet>
