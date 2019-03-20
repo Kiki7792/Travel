@@ -1,17 +1,17 @@
 <template>
+  import { setTimeout } from 'timers';
+  import { clearTimeout } from 'timers';
   <ul class="list">
     <li
-     class="item" 
-     v-for="item of letters" 
-     :key="item" 
-     :ref="item"
-     @click="handleLetterClick" 
-     @touchstart="handleTouchStart"
-     @touchmove="handleTouchMove"
-     @touchend="handleTouchEnd"
-    >
-     {{item}}
-    </li>
+      class="item"
+      v-for="item of letters"
+      :key="item"
+      :ref="item"
+      @click="handleLetterClick"
+      @touchstart="handleTouchStart"
+      @touchmove="handleTouchMove"
+      @touchend="handleTouchEnd"
+    >{{item}}</li>
   </ul>
 </template>
 <script>
@@ -22,17 +22,24 @@ export default {
   },
   data() {
     return {
-        touchStatus: false
-    }
+      touchStatus: false,
+      startY: 0,
+      timer: null
+    };
   },
-//   使用计算属性 使对象cities的变成存储字母表的数组
+  //   页面有更新 就会执行生命周期函数updated() {}
+  updated() {
+    //startY 是字母A距离input下边框的高度 74px
+    this.startY = this.$refs["A"][0].offsetTop;
+  },
+  //   使用计算属性 使对象cities的变成存储字母表的数组
   computed: {
     letters() {
       const letters = [];
       for (let i in this.cities) {
-         letters.push(i)
+        letters.push(i);
       }
-      return letters
+      return letters;
     }
   },
   methods: {
@@ -43,18 +50,20 @@ export default {
       this.touchStatus = true;
     },
     handleTouchMove(e) {
-      if(this.touchStatus) {
-        //startY 是字母A距离input下边框的高度
-        const startY = this.$refs['A'][0].offsetTop;
-        // console.log(startY);//74px
-        //touchY 是手指距离header上边框的高度 - (header的高度+input的高度)
-        const touchY = e.touches[0].clientY - 89;
-        //index 是计算出来的字母下标
-        const index = Math.floor((touchY - startY) / 20)
-        // console.log(index);
-        if(index >= 0 && index < this.letters.length) {
-          this.$emit('change', this.letters[index]);
-        }  
+      if (this.touchStatus) {
+        if (this.timer) {
+          clearTimeout(this.timer);
+        }
+        this.timer = setTimeout(() => {
+          //touchY 是手指距离header上边框的高度 - (header的高度+input的高度)
+          const touchY = e.touches[0].clientY - 89;
+          //index 是计算出来的字母下标
+          const index = Math.floor((touchY - this.startY) / 20);
+          // console.log(index);
+          if (index >= 0 && index < this.letters.length) {
+            this.$emit("change", this.letters[index]);
+          }
+        }, 16);
       }
     },
     handleTouchEnd() {
