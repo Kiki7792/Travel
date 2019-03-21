@@ -24,11 +24,13 @@ export default {
   },
   methods: {
     handleScroll() {
+      //因为全局绑定的scroll事件, 所以滚动时, detail会一直打印scroll, 点击back返回首页, scroll也会一直打印
+      // console.log('scroll');
       const top = document.documentElement.scrollTop;
       // 在60~140之间header-fixed有一个渐渐出现的效果
       if (top > 60) {
         let opacity = top / 140;
-        opacity = opacity > 1 ? 1 : opacity //opacity最大值只能是1
+        opacity = opacity > 1 ? 1 : opacity; //opacity最大值只能是1
         this.opacityStyle = {
           opacity
         };
@@ -40,6 +42,9 @@ export default {
   },
   activated() {
     window.addEventListener("scroll", this.handleScroll);
+  },
+  deactivated() {
+    window.removeEventListener("scroll", this.handleScroll);
   }
 };
 </script>
