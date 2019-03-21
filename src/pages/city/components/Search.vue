@@ -5,7 +5,12 @@
     </div>
     <div class="search-content" ref="search" v-show="keyword">
       <ul>
-        <li class="search-item border-bottom" v-for="item of list" :key="item.id">{{item.name}}</li>
+        <li
+          class="search-item border-bottom"
+          v-for="item of list"
+          :key="item.id"
+          @click="handleCityClick(item.name)"
+        >{{item.name}}</li>
         <!-- v-if的作用: 数组长度为0, 才显示下面的li标签内容 -->
         <li class="search-item border-bottom" v-if="hasNoData">没有找到匹配的数据</li>
       </ul>
@@ -14,6 +19,8 @@
 </template>
 <script>
 import BScroll from "better-scroll";
+// 使用vuex里的mapState, mapMutations
+import { mapMutations } from 'vuex'
 export default {
   name: "CitySearch",
   props: {
@@ -60,6 +67,16 @@ export default {
         // console.log(this.list);
       }, 100);
     }
+  },
+  methods: {
+    handleCityClick(city) {
+      // this.$store.commit("changeCity", city);
+       this.changeCity(city)
+      // vue-router => 编程式导航: 跳转到指定页面
+      this.$router.push("/");
+    },
+     // vuex有个mutation 叫changeCity, 然后把这个映射到组件里名字叫 changeCity的方法里
+    ...mapMutations(['changeCity'])
   },
   //页面DOM元素挂载完之后, 执行mounted() {}
   mounted() {

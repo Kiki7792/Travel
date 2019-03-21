@@ -10,6 +10,8 @@ import './assets/styles/iconfont.css'
 import fastclick from 'fastclick'
 //引入vue-awesome-swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+//引入vuex的store
+import store from './store/index'
 // require styles
 import 'swiper/dist/css/swiper.css'
 
@@ -24,5 +26,6 @@ new Vue({
   render: h => h(App),
   //使用路由
   router,
-
+  //根实例 使用store
+  store
 }).$mount('#app')

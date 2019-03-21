@@ -5,21 +5,31 @@
         <div class="title border-topbottom">当前城市</div>
         <div class="button-list">
           <div class="button-wrapper">
-            <div class="button">深圳</div>
+            <div class="button">{{this.currentCity}}</div>
           </div>
         </div>
       </div>
       <div class="area">
         <div class="title border-topbottom">热门城市</div>
         <div class="button-list">
-          <div class="button-wrapper" v-for="item of hot" :key="item.id">
+          <div
+            class="button-wrapper"
+            v-for="item of hot"
+            :key="item.id"
+            @click="handleCityClick(item.name)"
+          >
             <div class="button">{{item.name}}</div>
           </div>
         </div>
       </div>
       <div class="area" v-for="(item, key) of cities" :key="key" :ref="key">
         <div class="title border-topbottom">{{key}}</div>
-        <div class="item-list" v-for="innerItem of item" :key="innerItem.id">
+        <div
+         class="item-list" 
+         v-for="innerItem of item" 
+         :key="innerItem.id"
+         @click="handleCityClick(innerItem.name)"
+        >
           <div class="item border-bottom">{{innerItem.name}}</div>
         </div>
       </div>
@@ -28,6 +38,8 @@
 </template>
 <script>
 import BScroll from "better-scroll";
+// 使用vuex里的mapState, mapMutations
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: "CityList",
   props: {
@@ -35,9 +47,13 @@ export default {
     cities: Object,
     letter: String
   },
-  //页面DOM元素挂载完之后, 执行mounted() {}
-  mounted() {
-    this.scroll = new BScroll(this.$refs.wrapper);
+  computed: {
+    // 使用对象展开运算符将此对象混入到外部对象中
+    //mapState把vuex里面的数据 映射到 此组件的computed属性里 
+    //映射的是vuex里'city'的数据 映射到 名字叫'currentCity' 的计算属性中, 在上面就可以直接使用 this.city
+  ...mapState({
+    currentCity: 'city'
+  })
   },
   watch: {
     //   监听letter的变化, 当letter变化时, 使cities 数组渲染 当前letter的区域
@@ -53,6 +69,22 @@ export default {
         this.scroll.scrollToElement(element);
       }
     }
+  },
+  methods: {
+    handleCityClick(city) {
+      // alert(city)
+      // 改变city的时候, 调用vuex的actions方法
+      // this.$store.dispatch("changeCity", city);
+      // this.$store.commit("changeCity", city);
+      this.changeCity(city)
+      this.$router.push('/');
+    },
+    // vuex有个mutation 叫changeCity, 然后把这个映射到组件里名字叫 changeCity的方法里
+    ...mapMutations(['changeCity'])
+  },
+  //页面DOM元素挂载完之后, 执行mounted() {}
+  mounted() {
+    this.scroll = new BScroll(this.$refs.wrapper);
   }
 };
 </script>
