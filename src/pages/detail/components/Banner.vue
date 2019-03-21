@@ -11,11 +11,6 @@
         </p>
         <p class="banner-title">东部华侨城茶溪谷</p>
       </div>
-      <router-link to="/">
-        <div class="banner-back">
-          <span class="iconfont banner-back-icon">&#xe613;</span>
-        </div>
-      </router-link>
     </div>
     <common-gallary
      :imgs="imgs" 
@@ -92,26 +87,6 @@ export default {
         font-size: 0.2rem;
         margin-right: 0.05rem;
       }
-    }
-  }
-
-  .banner-back {
-    position: absolute;
-    top: 0.1rem;
-    left: 0.1rem;
-    width: 0.7rem;
-    height: 0.7rem;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-
-    .banner-back-icon {
-      font-size: 0.32rem;
-      font-weight: 800;
-      color: #fff;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-25%, -50%);
     }
   }
 }
