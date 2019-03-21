@@ -2,8 +2,17 @@
   <div>
     <div class="title">热销推荐</div>
     <ul>
+      <!-- <router-link to="/detail"> -->
+      <!-- router-link 浏览器解析成a标签, 这样字体颜色会变化, 可以直接把li标签替换成router-link, 而且要加tag="li" -->
       <!-- 因为main.js引入了1px的边框解决方案, 所以这次就直接在li中加类名 border-bottom -->
-      <li class="item border-bottom" v-for="item of list" :key="item.id">
+      <!-- <router-link -->
+      <router-link
+        tag="li"
+        class="item border-bottom"
+        v-for="item of list"
+        :key="item.id"
+        :to="'/detail/'+item.id"
+      >
         <img class="item-img" :src="item.imgUrl">
 
         <div class="item-info">
@@ -11,7 +20,9 @@
           <p class="item-desc">{{item.desc}}</p>
           <button class="item-button">查看详情</button>
         </div>
-      </li>
+      </router-link>
+      <!-- </li> -->
+      <!-- </router-link> -->
     </ul>
   </div>
 </template>
