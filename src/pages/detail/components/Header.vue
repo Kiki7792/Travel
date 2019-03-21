@@ -4,7 +4,7 @@
       <div class="iconfont header-abs-back">&#xe613;</div>
     </router-link>
     <!-- 给header-fixed 动态绑定一个style属性 opacity -->
-    <div class="header-fixed" v-show="!showAbs" :style="opacityStyle">景点选择
+    <div class="header-fixed" v-show="!showAbs" :style="opacityStyle">景点详情
       <router-link to="/">
         <div class="iconfont header-fixed-back">&#xe624;</div>
       </router-link>
@@ -70,6 +70,7 @@ export default {
 }
 
 .header-fixed {
+  z-index: 2;
   position: fixed;
   top: 0;
   left: 0;
