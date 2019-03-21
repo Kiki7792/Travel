@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <keep-alive>
+    <!-- exclude的作用是除了Detail.vue其他页面都会被缓存 -->
+    <keep-alive exclude="Detail">
       <router-view></router-view>
     </keep-alive>
   </div>

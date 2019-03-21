@@ -70,7 +70,7 @@ export default {
 }
 
 .header-fixed {
-  z-index: 2;
+  z-index: 100;
   position: fixed;
   top: 0;
   left: 0;

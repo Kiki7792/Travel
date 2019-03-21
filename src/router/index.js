@@ -23,15 +23,18 @@ let routes = [{
         path: '/detail/:id', //:id动态路由
         name: 'Detail',
         component: Detail
-    },
-
+    }
 ]
+
 
 //实例化路由
 const router = new VueRouter({
     //更改路由的默认hash为history
     // mode: 'history',
-    routes
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        return {x: 0, y: 0}
+    }
 })
 
 export default router;
